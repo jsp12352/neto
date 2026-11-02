@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Connexion staff — NETO{% endblock %}
+{% block content %}
+<section class="login-wrap">
+  <div class="login-card contact-form">
+    <span class="eyebrow">Panel staff</span>
+    <h1>Connexion staff</h1>
+    <p>Identifiant : <strong>staffneto</strong> · Mot de passe : <strong>03030202</strong></p>
+    <form method="post">
+      <label>Nom d'utilisateur
+        <input name="username" value="staffneto" required>
+      </label>
+      <label>Mot de passe
+        <input type="password" name="password" value="03030202" required>
+      </label>
+      <button class="button" type="submit">Accéder au panel</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

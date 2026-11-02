@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NETO accompagne vos projets numériques : sites web, bots Discord et automatisation.">
+  <title>{% block title %}NETO — Build. Code. Launch.{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+{% set settings = (site_data.settings if site_data and site_data.settings else {}) %}
+{% if settings.get('announcement_enabled', False) %}
+<div class="site-announcement" role="status" aria-live="polite">
+  <div class="announcement-inner">
+    <span class="announcement-title">{{ settings.get('announcement_title', 'NETO') }}</span>
+    <span class="announcement-text">{{ settings.get('announcement_text', 'Bienvenue chez NETO') }}</span>
+  </div>
+</div>
+{% endif %}
+<header class="topbar">
+  <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">N</span> NETO<span class="brand-dot">.</span></a>
+  <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <nav class="nav">
+    <a href="{{ url_for('home') }}#accueil">Accueil</a><a href="{{ url_for('home') }}#services">Services</a>
+    <a href="{{ url_for('home') }}#realisations">Réalisations</a><a href="{{ url_for('home') }}#apropos">À propos</a>
+    <a href="{{ url_for('home') }}#tarifs">Tarifs</a><a href="{{ url_for('home') }}#contact">Contact</a>
+  </nav>
+  <a class="button small" href="{{ url_for('home') }}#contact">Démarrer un projet <span>↗</span></a>
+</header>
+{% with notices = get_flashed_messages(with_categories=true) %}
+  {% if notices %}<div class="flash-wrap">{% for category, message in notices %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% endwith %}
+<main>{% block content %}{% endblock %}</main>
+<footer class="footer">
+  <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">N</span> NETO<span class="brand-dot">.</span></a>
+  <p>Vos idées. Notre expertise.</p>
+  <div class="footer-links"><a href="{{ url_for('home') }}#services">Services</a><a href="{{ url_for('home') }}#realisations">Réalisations</a><a href="{{ url_for('home') }}#contact">Contact</a><a href="{{ url_for('login') }}">Administration</a></div>
+  <small>© {{ 2026 }} NETO. Tous droits réservés.</small>
+</footer>
+</body></html>

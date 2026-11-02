@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Staff panel — NETO{% endblock %}
+{% block content %}
+<section class="section admin-page">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">Espace staff</span>
+      <h1>Panel <span class="gradient-text">staffneto</span></h1>
+    </div>
+    <a class="button secondary" href="{{ url_for('staff_logout') }}">Déconnexion</a>
+  </div>
+
+  <div class="admin-stats">
+    <div><b>{{ data.services|length }}</b><span>Services</span></div>
+    <div><b>{{ data.projects|length }}</b><span>Projets</span></div>
+    <div><b>{{ data.messages|length }}</b><span>Messages</span></div>
+  </div>
+
+  <div class="admin-columns">
+    <div class="admin-panel">
+      <h2>Accès limité</h2>
+      <p>Le compte staff ne peut ni modifier les services, ni supprimer des projets, ni réinitialiser le site.</p>
+      <p>Les droits disponibles sont uniquement :</p>
+      <ul>
+        <li>voir l’état du site</li>
+        <li>activer/désactiver la maintenance</li>
+        <li>ouvrir/fermer le formulaire de contact</li>
+      </ul>
+    </div>
+
+    <form class="contact-form" action="{{ url_for('staff_toggle_maintenance') }}" method="post">
+      <h2>Maintenance</h2>
+      <label><input type="checkbox" name="maintenance_mode" {% if data.settings and data.settings.maintenance_mode %}checked{% endif %}> Site en maintenance</label>
+      <button class="button" type="submit">Appliquer</button>
+    </form>
+  </div>
+
+  <div class="admin-columns" style="margin-top:24px;">
+    <form class="contact-form" action="{{ url_for('staff_toggle_contact') }}" method="post">
+      <h2>Contact</h2>
+      <label><input type="checkbox" name="contact_enabled" {% if data.settings and data.settings.contact_enabled %}checked{% endif %}> Ouvrir le formulaire</label>
+      <button class="button" type="submit">Appliquer</button>
+    </form>
+
+    <div class="admin-panel">
+      <h2>État du site</h2>
+      <p><strong>Brand :</strong> {{ data.settings.brand if data.settings else 'NETO' }}</p>
+      <p><strong>Maintenance :</strong> {{ 'Oui' if data.settings and data.settings.maintenance_mode else 'Non' }}</p>
+      <p><strong>Contact :</strong> {{ 'Ouvert' if data.settings and data.settings.contact_enabled else 'Fermé' }}</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

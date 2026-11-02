@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Connexion administration — NETO{% endblock %}
+{% block content %}
+<section class="login-wrap">
+  <form class="contact-form login-card" method="post">
+    <span class="eyebrow">Espace privé</span>
+    <h1>Administration</h1>
+    <p>Accès réservé uniquement à l’équipe autorisée.</p>
+    <label>Identifiant<input name="username" required autocomplete="username" placeholder="Votre identifiant"></label>
+    <label>Mot de passe<input type="password" name="password" required autocomplete="current-password" placeholder="Votre mot de passe"></label>
+    <button class="button" type="submit">Se connecter ↗</button>
+    <a class="text-link" href="{{ url_for('home') }}">← Retour au site</a>
+  </form>
+</section>
+{% endblock %}

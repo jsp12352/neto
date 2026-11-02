@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Maintenance — NETO{% endblock %}
+{% block content %}
+<section class="login-wrap">
+  <div class="login-card contact-form">
+    <span class="eyebrow">Sécurité</span>
+    <h1>Site en maintenance</h1>
+    <p>Le site est temporairement verrouillé pour des raisons de sécurité ou de mise à jour.</p>
+    <a class="button" href="{{ url_for('home') }}">Retourner à l'accueil</a>
+  </div>
+</section>
+{% endblock %}

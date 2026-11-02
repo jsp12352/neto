@@ -1,0 +1,147 @@
+{
+  "services": [
+    {
+      "name": "Sites web",
+      "description": "Des sites modernes, rapides et adaptés à tes besoins.",
+      "details": "Site vitrine, portfolio, landing page et e-commerce.",
+      "image": "/static/images/661194-shinystar.png"
+    },
+    {
+      "name": "Bots Discord",
+      "description": "Des bots personnalisés pour automatiser et gérer ton serveur.",
+      "details": "Commandes, tickets, modération et systèmes sur mesure.",
+      "image": "/static/images/829331-discord-staff.png"
+    },
+    {
+      "name": "Développement sur mesure",
+      "description": "Des outils conçus autour de ton idée.",
+      "details": "Applications, tableaux de bord et intégrations.",
+      "image": "/static/images/671606-codeexpert.png"
+    },
+    {
+      "name": "Automatisation",
+      "description": "Moins de tâches répétitives, plus de temps pour tes projets.",
+      "details": "Automatisation de tâches et connexions entre outils.",
+      "image": "/static/images/9928-black-fire.gif"
+    },
+    {
+      "name": "Conseil & accompagnement",
+      "description": "Un coup de main pour transformer une idée en projet concret.",
+      "details": "Organisation, choix techniques et accompagnement.",
+      "image": "/static/images/52143-trainee.png"
+    },
+    {
+      "name": "Aide au lancement",
+      "description": "Un cadre clair pour démarrer ton projet numérique.",
+      "details": "Conseils, plan d'action et mise en ligne.",
+      "image": "/static/images/173461-staff.png"
+    }
+  ],
+  "projects": [
+    {
+      "title": "bot discord gestion",
+      "category": "bot discord",
+      "description": "nous avons créer un bot discord gratuitement pour Skypike-_- nous le remercions d'avoir fait appelle a nous",
+      "link": "https://discord.gg/"
+    }
+  ],
+  "plans": [
+    {
+      "name": "Créer un site web",
+      "price": "À partir de 15€",
+      "description": "Nous créons un site web de A à Z, simple, propre et prêt à être lancé.",
+      "features": [
+        "Page simple",
+        "Design responsive",
+        "Formulaire de contact"
+      ]
+    },
+    {
+      "name": "Créer un bot Discord",
+      "price": "À partir de 10€",
+      "description": "Nous créons un bot Discord complet, utile et prêt à fonctionner.",
+      "features": [
+        "Commandes personnalisées",
+        "Modération",
+        "Accompagnement"
+      ]
+    },
+    {
+      "name": "Développement sur mesure",
+      "price": "À partir de 20€",
+      "description": "Tu as une idée ? On la transforme en outil concret, site ou bot.",
+      "features": [
+        "Solutions sur mesure",
+        "Automatisations",
+        "Intégrations"
+      ]
+    },
+    {
+      "name": "Conseil & accompagnement",
+      "price": "À partir de 8€",
+      "description": "Des conseils utiles et un accompagnement pour avancer dans ton projet.",
+      "features": [
+        "Aide dans tes projets",
+        "Conseils techniques",
+        "Suivi personnalisé"
+      ]
+    },
+    {
+      "name": "Automatisation",
+      "price": "À partir de 5€",
+      "description": "On automatise les tâches répétitives pour gagner du temps.",
+      "features": [
+        "Tâches répétitives",
+        "Connexion entre outils",
+        "Scripts personnalisés"
+      ]
+    },
+    {
+      "name": "Aide au lancement",
+      "price": "À partir de 2€",
+      "description": "On t’aide à lancer et configurer tes scripts et outils.",
+      "features": [
+        "Lancement de scripts",
+        "Configuration",
+        "Support"
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Combien de temps faut-il pour créer un site ?",
+      "answer": "Le délai dépend du projet. Un site simple peut être livré en 7 à 15 jours, alors qu'un projet plus complet demande plus de travail."
+    },
+    {
+      "question": "Pouvez-vous aussi créer un bot Discord ?",
+      "answer": "Oui. Nous concevons des bots Discord pour la modération, le support client, les tickets, l'automatisation et les commandes personnalisées."
+    },
+    {
+      "question": "Travaillez-vous sur mesure ?",
+      "answer": "Oui. Chaque projet est étudié selon vos besoins, vos objectifs et votre budget pour proposer une solution adaptée."
+    },
+    {
+      "question": "Quels services sont inclus après la livraison ?",
+      "answer": "Nous pouvons vous accompagner sur la mise en ligne, la configuration, la maintenance et les améliorations continues selon votre besoin."
+    }
+  ],
+  "testimonials": [],
+  "settings": {
+    "brand": "NETO",
+    "hero_tag": "Votre partenaire numérique",
+    "hero_title": "Transformez vos idées en projets concrets.",
+    "hero_subtitle": "NETO vous accompagne dans la création de sites web, de bots Discord et d'outils sur mesure pour faire avancer vos projets.",
+    "cta_primary": "Démarrer mon projet",
+    "cta_secondary": "Voir nos réalisations",
+    "footer_text": "Vos idées. Notre expertise.",
+    "maintenance_mode": false,
+    "contact_enabled": true,
+    "show_prices": true,
+    "theme_color": "#7044f5",
+    "announcement_enabled": false,
+    "announcement_title": "NETO",
+    "announcement_text": "Bienvenue chez NETO — on crée des projets qui font la différence."
+  },
+  "messages": [],
+  "leads": []
+}

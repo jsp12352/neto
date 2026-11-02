@@ -1,0 +1,144 @@
+{% extends "base.html" %}{% block title %}Administration — NETO{% endblock %}
+{% block content %}
+<section class="section admin-page">
+  <div class="section-heading">
+    <div><span class="eyebrow">Espace owner</span><h1>Tableau de bord <span class="gradient-text">NETO.</span></h1></div>
+    <a class="button secondary" href="{{ url_for('logout') }}">Déconnexion</a>
+  </div>
+
+  <div class="admin-stats">
+    <div><b>{{ data.projects|length }}</b><span>Réalisations</span></div>
+    <div><b>{{ data.messages|length }}</b><span>Demandes reçues</span></div>
+    <div><b>{{ data.plans|length }}</b><span>Offres</span></div>
+  </div>
+
+  <div class="admin-columns">
+    <form class="contact-form" action="{{ url_for('owner_update_settings') }}" method="post">
+      <h2>Paramètres du site</h2>
+      <label>Brand<input name="brand" value="{{ data.settings.brand if data.settings else 'NETO' }}" maxlength="40"></label>
+      <label>Tagline<input name="hero_tag" value="{{ data.settings.hero_tag if data.settings else 'Votre partenaire numérique' }}" maxlength="80"></label>
+      <label>Titre principal<input name="hero_title" value="{{ data.settings.hero_title if data.settings else 'Transformez vos idées en projets concrets.' }}" maxlength="120"></label>
+      <label>Sous-titre<textarea name="hero_subtitle" rows="3" maxlength="250">{{ data.settings.hero_subtitle if data.settings else '' }}</textarea></label>
+      <label>CTA principal<input name="cta_primary" value="{{ data.settings.cta_primary if data.settings else 'Démarrer mon projet' }}" maxlength="40"></label>
+      <label>CTA secondaire<input name="cta_secondary" value="{{ data.settings.cta_secondary if data.settings else 'Voir nos réalisations' }}" maxlength="40"></label>
+      <label>Footer<textarea name="footer_text" rows="2" maxlength="80">{{ data.settings.footer_text if data.settings else 'Vos idées. Notre expertise.' }}</textarea></label>
+      <label>Couleur principale<input type="color" name="theme_color" value="{{ data.settings.theme_color if data.settings else '#7044f5' }}"></label>
+      <label><input type="checkbox" name="maintenance_mode" {% if data.settings and data.settings.maintenance_mode %}checked{% endif %}> Mode maintenance</label>
+      <label><input type="checkbox" name="contact_enabled" {% if data.settings and data.settings.contact_enabled %}checked{% endif %}> Formulaire de contact actif</label>
+      <label><input type="checkbox" name="show_prices" {% if data.settings and data.settings.show_prices %}checked{% endif %}> Afficher les prix</label>
+      <label><input type="checkbox" name="announcement_enabled" {% if data.settings and data.settings.announcement_enabled %}checked{% endif %}> Afficher l’annonce</label>
+      <label>Titre de l’annonce<input name="announcement_title" value="{{ data.settings.announcement_title if data.settings and data.settings.announcement_title else 'NETO' }}" maxlength="30"></label>
+      <label>Texte de l’annonce<textarea name="announcement_text" rows="2" maxlength="180">{{ data.settings.announcement_text if data.settings and data.settings.announcement_text else 'Bienvenue chez NETO — on crée des projets qui font la différence.' }}</textarea></label>
+      <button class="button" type="submit">Sauvegarder</button>
+    </form>
+
+    <form class="contact-form" action="{{ url_for('add_project') }}" method="post">
+      <h2>Ajouter une réalisation</h2>
+      <label>Nom du projet<input name="title" required maxlength="120"></label>
+      <label>Catégorie<input name="category" placeholder="Site web, Bot Discord..." maxlength="80"></label>
+      <label>Description<textarea name="description" rows="3" required maxlength="1000"></textarea></label>
+      <label>Lien du projet (facultatif)<input type="url" name="link" placeholder="https://..."></label>
+      <button class="button" type="submit">Publier la réalisation ↗</button>
+    </form>
+  </div>
+
+  <div class="admin-columns" style="margin-top:24px;">
+    <div class="admin-panel">
+      <h2>Modifier les tarifs</h2>
+      {% for plan in data.plans %}
+      <form class="inline-form" action="{{ url_for('update_plan') }}" method="post">
+        <input type="hidden" name="index" value="{{ loop.index0 }}">
+        <b>{{ plan.name }}</b>
+        <input name="price" value="{{ plan.price }}" required maxlength="80">
+        <button class="button small" type="submit">Enregistrer</button>
+      </form>
+      {% endfor %}
+    </div>
+
+    <div class="admin-panel">
+      <h2>Maintenance & contact</h2>
+      <form action="{{ url_for('owner_update_settings') }}" method="post">
+        <label><input type="checkbox" name="maintenance_mode" {% if data.settings and data.settings.maintenance_mode %}checked{% endif %}> Site en maintenance</label>
+        <label><input type="checkbox" name="contact_enabled" {% if data.settings and data.settings.contact_enabled %}checked{% endif %}> Formulaire de contact actif</label>
+        <button class="button" type="submit">Appliquer</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-columns" style="margin-top:24px;">
+    <div class="admin-panel">
+      <h2>Services</h2>
+      {% for service in data.services %}
+      <form class="inline-form" action="{{ url_for('owner_delete_service', service_id=loop.index0) }}" method="post">
+        <b>{{ service.name }}</b>
+        <span>{{ service.description[:30] }}</span>
+        <button class="button danger small" type="submit">Supprimer</button>
+      </form>
+      {% endfor %}
+      <form class="contact-form" action="{{ url_for('owner_add_service') }}" method="post" style="margin-top:18px;">
+        <label>Nom<input name="name" required maxlength="80"></label>
+        <label>Description<textarea name="description" rows="2" required maxlength="180"></textarea></label>
+        <label>Détails<textarea name="details" rows="2" maxlength="200"></textarea></label>
+        <label>Image URL<input name="image" value="/static/images/661194-shinystar.png" maxlength="200"></label>
+        <button class="button" type="submit">Ajouter</button>
+      </form>
+    </div>
+
+    <div class="admin-panel">
+      <h2>FAQ</h2>
+      {% for faq in data.faqs %}
+      <form class="inline-form" action="{{ url_for('owner_delete_faq', faq_id=loop.index0) }}" method="post">
+        <b>{{ faq.question[:25] }}</b>
+        <span>FAQ</span>
+        <button class="button danger small" type="submit">Supprimer</button>
+      </form>
+      {% endfor %}
+      <form class="contact-form" action="{{ url_for('owner_add_faq') }}" method="post" style="margin-top:18px;">
+        <label>Question<input name="question" required maxlength="160"></label>
+        <label>Réponse<textarea name="answer" rows="3" required maxlength="500"></textarea></label>
+        <button class="button" type="submit">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-columns" style="margin-top:24px;">
+    <div class="admin-panel">
+      <h2>Témoignages</h2>
+      {% for testimonial in data.testimonials %}
+      <form class="inline-form" action="{{ url_for('owner_delete_testimonial', testimonial_id=loop.index0) }}" method="post">
+        <b>{{ testimonial.name }}</b>
+        <span>{{ testimonial.role }}</span>
+        <button class="button danger small" type="submit">Supprimer</button>
+      </form>
+      {% endfor %}
+      <form class="contact-form" action="{{ url_for('owner_add_testimonial') }}" method="post" style="margin-top:18px;">
+        <label>Nom<input name="name" required maxlength="80"></label>
+        <label>Rôle<input name="role" maxlength="120"></label>
+        <label>Témoignage<textarea name="quote" rows="3" required maxlength="400"></textarea></label>
+        <button class="button" type="submit">Ajouter</button>
+      </form>
+    </div>
+
+    <div class="admin-panel">
+      <h2>Demandes de contact</h2>
+      {% if data.messages %}
+      {% for message in data.messages %}
+      <div class="admin-row">
+        <div><b>{{ message.name }} · {{ message.email }}</b><p>{{ message.subject }}<br>{{ message.message }}</p></div>
+        <form method="post" action="{{ url_for('delete_message', message_id=loop.index0) }}" onsubmit="return confirm('Supprimer cette demande ?')"><button class="button danger small">Supprimer</button></form>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>Aucune demande reçue.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="admin-panel" style="margin-top:24px;">
+    <h2>Réinitialisation du site</h2>
+    <form action="{{ url_for('owner_reset_data') }}" method="post" onsubmit="return confirm('Réinitialiser entièrement le site ?')">
+      <button class="button danger" type="submit">Réinitialiser</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
